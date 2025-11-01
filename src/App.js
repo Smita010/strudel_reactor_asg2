@@ -109,54 +109,90 @@ useEffect(() => {
 
 
 return (
-    <div>
-        <h2>Strudel Demo</h2>
+    <div className="container mt-4">
+        <h2 className="text-center mb-3">Strudel Demo</h2>
         <main>
+            <div className="row">
 
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <PreprocessorEditor value={text} onChange={setText} />
-                        <div className="alert alert-secondary mt-3">
-                            <strong>Processed Output Preview:</strong>
-                            <pre>{text.replaceAll('<p1_Radio>', document.getElementById('flexRadioDefault2')?.checked ? '_' : '')}</pre>
+                <div className="col-md-8">
+                    <div className="card shadow-sm mb-3">
+                        <div className="card-body">
+                            <h5 className="text-primary">Preprocessor Editor</h5>
+                            <PreprocessorEditor value={text} onChange={setText} />
                         </div>
                     </div>
-                    <div className="col-md-4">
 
-                        <nav>
-                            <button id="process" className="btn btn-outline-primary">Preprocess</button>
-                            <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
-                            <br />
-                            <button id="play" className="btn btn-outline-primary">Play</button>
-                            <button id="stop" className="btn btn-outline-primary">Stop</button>
-                        </nav>
+                    <div className="card shadow-sm mb-3">
+                        <div className="card-body">
+                            <h5 className="text-primary">Processed Output Preview</h5>
+                            <pre className="code-preview">
+                                {text.replaceAll(
+                                    '<p1_Radio>',
+                                    (typeof document !== 'undefined' &&
+                                        document.getElementById('flexRadioDefault2') &&
+                                        document.getElementById('flexRadioDefault2').checked)
+                                        ? '_'
+                                        : ''
+                                )}
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5 className="text-primary">Live Strudel Output</h5>
+                            <div id="editor" />
+                            <div id="output" />
+                        </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <div id="editor" />
-                        <div id="output" />
-                    </div>
-                    <div className="col-md-4">
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={ProcAndPlay} defaultChecked />
-                            <label className="form-check-label" htmlFor="flexRadioDefault1">
-                                p1: ON
-                            </label>
+                <div className="col-md-4">
+                    <div className="card shadow-sm mb-3">
+                        <div className="card-body text-center">
+                            <h5 className="text-primary mb-3">Playback Controls</h5>
+                            <div className="btn-group d-flex flex-wrap justify-content-center">
+                                <button id="process" className="btn btn-outline-primary btn-sm">Preprocess</button>
+                                <button id="process_play" className="btn btn-outline-success btn-sm">Proc & Play</button>
+                                <button id="play" className="btn btn-outline-info btn-sm">Play</button>
+                                <button id="stop" className="btn btn-outline-danger btn-sm">Stop</button>
+                            </div>
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={ProcAndPlay} />
-                            <label className="form-check-label" htmlFor="flexRadioDefault2">
-                                p1: HUSH
-                            </label>
+                    </div>
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5 className="text-primary">Instrument 1 (p1)</h5>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault1"
+                                    onChange={ProcAndPlay}
+                                    defaultChecked
+                                />
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                    p1: ON
+                                </label>
+                            </div>
+                            <div className="form-check mt-2">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault2"
+                                    onChange={ProcAndPlay}
+                                />
+                                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                    p1: HUSH
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <canvas id="roll"></canvas>
-        </main >
-    </div >
+            <canvas id="roll" className="mt-4"></canvas>
+        </main>
+    </div>
 );
 
 

@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
@@ -46,7 +46,7 @@ export function ProcAndPlay() {
 
 export function Proc() {
 
-    let proc_text = document.getElementById('proc').value
+    let proc_text = document.getElementById('proc').value || "";
     let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
     ProcessText(proc_text);
     globalEditor.setCode(proc_text_replaced)
@@ -65,6 +65,7 @@ export function ProcessText(match, ...args) {
 export default function StrudelDemo() {
 
 const hasRun = useRef(false);
+const [text, setText] = useState('<p1_Radio> ' + stranger_tune);
 
 useEffect(() => {
 
@@ -115,7 +116,11 @@ return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <PreprocessorEditor/>
+                        <PreprocessorEditor value={text} onChange={setText} />
+                        <div className="alert alert-secondary mt-3">
+                            <strong>Processed Output Preview:</strong>
+                            <pre>{text.replaceAll('<p1_Radio>', document.getElementById('flexRadioDefault2')?.checked ? '_' : '')}</pre>
+                        </div>
                     </div>
                     <div className="col-md-4">
 

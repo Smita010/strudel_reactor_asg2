@@ -10,6 +10,8 @@ import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreprocessorEditor from './components/PreprocessorEditor';
+import PlaybackControls from "./components/PlaybackControls";
+import InstrumentControls from "./components/InstrumentControls";
 
 let globalEditor = null;
 
@@ -108,92 +110,57 @@ useEffect(() => {
 }, []);
 
 
-return (
-    <div className="container mt-4">
-        <h2 className="text-center mb-3">Strudel Demo</h2>
-        <main>
-            <div className="row">
+    return (
+        <div className="container mt-4">
+            <h2 className="text-center mb-3">Strudel Demo</h2>
+            <main>
+                <div className="row">
+                    <div className="col-md-8">
+                        <div className="card shadow-sm mb-3">
+                            <div className="card-body">
+                                <h5 className="text-primary">Preprocessor Editor</h5>
+                                <PreprocessorEditor value={text} onChange={setText} />
+                            </div>
+                        </div>
 
-                <div className="col-md-8">
-                    <div className="card shadow-sm mb-3">
-                        <div className="card-body">
-                            <h5 className="text-primary">Preprocessor Editor</h5>
-                            <PreprocessorEditor value={text} onChange={setText} />
+                        <div className="card shadow-sm mb-3">
+                            <div className="card-body">
+                                <h5 className="text-primary">Processed Output Preview</h5>
+                                <pre className="code-preview">
+                                    {text.replaceAll(
+                                        "<p1_Radio>",
+                                        (typeof document !== "undefined" &&
+                                            document.getElementById("flexRadioDefault2")?.checked)
+                                            ? "_"
+                                            : ""
+                                    )}
+                                </pre>
+                            </div>
+                        </div>
+
+                        <div className="card shadow-sm">
+                            <div className="card-body">
+                                <h5 className="text-primary">Live Strudel Output</h5>
+                                <div id="editor" />
+                                <div id="output" />
+                            </div>
                         </div>
                     </div>
-
-                    <div className="card shadow-sm mb-3">
-                        <div className="card-body">
-                            <h5 className="text-primary">Processed Output Preview</h5>
-                            <pre className="code-preview">
-                                {text.replaceAll(
-                                    '<p1_Radio>',
-                                    (typeof document !== 'undefined' &&
-                                        document.getElementById('flexRadioDefault2') &&
-                                        document.getElementById('flexRadioDefault2').checked)
-                                        ? '_'
-                                        : ''
-                                )}
-                            </pre>
-                        </div>
-                    </div>
-
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <h5 className="text-primary">Live Strudel Output</h5>
-                            <div id="editor" />
-                            <div id="output" />
-                        </div>
+                    <div className="col-md-4">
+                        <PlaybackControls
+                            onProcess={Proc}
+                            onProcessPlay={() => {
+                                Proc();
+                                globalEditor?.evaluate();
+                            }}
+                            onPlay={() => globalEditor?.evaluate()}
+                            onStop={() => globalEditor?.stop()}
+                        />
+                        <InstrumentControls onToggle={ProcAndPlay} />
                     </div>
                 </div>
-                <div className="col-md-4">
-                    <div className="card shadow-sm mb-3">
-                        <div className="card-body text-center">
-                            <h5 className="text-primary mb-3">Playback Controls</h5>
-                            <div className="btn-group d-flex flex-wrap justify-content-center">
-                                <button id="process" className="btn btn-outline-primary btn-sm">Preprocess</button>
-                                <button id="process_play" className="btn btn-outline-success btn-sm">Proc & Play</button>
-                                <button id="play" className="btn btn-outline-info btn-sm">Play</button>
-                                <button id="stop" className="btn btn-outline-danger btn-sm">Stop</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <h5 className="text-primary">Instrument 1 (p1)</h5>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="flexRadioDefault"
-                                    id="flexRadioDefault1"
-                                    onChange={ProcAndPlay}
-                                    defaultChecked
-                                />
-                                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                                    p1: ON
-                                </label>
-                            </div>
-                            <div className="form-check mt-2">
-                                <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="flexRadioDefault"
-                                    id="flexRadioDefault2"
-                                    onChange={ProcAndPlay}
-                                />
-                                <label className="form-check-label" htmlFor="flexRadioDefault2">
-                                    p1: HUSH
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <canvas id="roll" className="mt-4"></canvas>
-        </main>
-    </div>
-);
-
-
+                <canvas id="roll" className="mt-4"></canvas>
+            </main>
+        </div>
+    );
 }

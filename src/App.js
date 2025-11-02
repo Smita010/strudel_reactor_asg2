@@ -12,6 +12,8 @@ import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreprocessorEditor from './components/PreprocessorEditor';
 import PlaybackControls from "./components/PlaybackControls";
 import InstrumentControls from "./components/InstrumentControls";
+import TempoControl from "./components/TempoControl";
+import InstrumentSelector from "./components/InstrumentSelector";
 
 let globalEditor = null;
 
@@ -35,8 +37,6 @@ export function SetupButtons() {
     }
     )
 }
-
-
 
 export function ProcAndPlay() {
     if (globalEditor != null && globalEditor.repl.state.started == true) {
@@ -156,7 +156,21 @@ useEffect(() => {
                             onPlay={() => globalEditor?.evaluate()}
                             onStop={() => globalEditor?.stop()}
                         />
+                        <TempoControl
+                            onChange={(bpm) => {
+                                if (typeof window.setcps === "function") {
+                                    window.setcps(bpm / 60 / 4);
+                                }
+                            }}
+                        />
                         <InstrumentControls onToggle={ProcAndPlay} />
+                        <InstrumentControls onToggle={ProcAndPlay} />
+                        <InstrumentSelector
+                            onChange={(instrument) => {
+                                console.log("Instrument changed to:", instrument);
+                                ProcAndPlay();
+                            }}
+                        />
                     </div>
                 </div>
                 <canvas id="roll" className="mt-4"></canvas>

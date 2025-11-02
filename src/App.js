@@ -63,7 +63,6 @@ export function ProcessText(match, ...args) {
 
     return replace
 }
-
 export default function StrudelDemo() {
 
 const hasRun = useRef(false);
@@ -106,9 +105,7 @@ useEffect(() => {
         SetupButtons()
         Proc()
     }
-
 }, []);
-
 
     return (
         <div className="container mt-4">
@@ -163,7 +160,6 @@ useEffect(() => {
                                 }
                             }}
                         />
-                        <InstrumentControls onToggle={ProcAndPlay} />
                         <InstrumentControls onToggle={ProcAndPlay} />
                         <InstrumentSelector
                             onChange={(instrument) => {

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\playbackcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\playbackcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\instrumentselector.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\instrumentselector.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\instrumentcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\instrumentcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\tempocontrol.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\tempocontrol.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +22,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InstrumentControls.jsx",
-              "DocumentMoniker": "C:\\Users\\smita\\Source\\Repos\\strudel_reactor_asg2\\src\\components\\InstrumentControls.jsx",
-              "RelativeDocumentMoniker": "src\\components\\InstrumentControls.jsx",
-              "ToolTip": "C:\\Users\\smita\\Source\\Repos\\strudel_reactor_asg2\\src\\components\\InstrumentControls.jsx",
-              "RelativeToolTip": "src\\components\\InstrumentControls.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-11-01T06:32:06.915Z",
+              "DocumentIndex": 0,
+              "Title": "InstrumentSelector.js",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\InstrumentSelector.js",
+              "RelativeDocumentMoniker": "src\\components\\InstrumentSelector.js",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\InstrumentSelector.js",
+              "RelativeToolTip": "src\\components\\InstrumentSelector.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-01T08:24:32.954Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PlaybackControls.jsx",
-              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\PlaybackControls.jsx",
-              "RelativeDocumentMoniker": "src\\components\\PlaybackControls.jsx",
-              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\PlaybackControls.jsx",
-              "RelativeToolTip": "src\\components\\PlaybackControls.jsx",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAiwCEAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-11-01T06:21:48.359Z",
+              "DocumentIndex": 2,
+              "Title": "TempoControl.js",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\TempoControl.js",
+              "RelativeDocumentMoniker": "src\\components\\TempoControl.js",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\TempoControl.js",
+              "RelativeToolTip": "src\\components\\TempoControl.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-01T08:19:45.811Z",
               "EditorCaption": ""
             },
             {
@@ -69,6 +73,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.js",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
+              "RelativeDocumentMoniker": "src\\App.js",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
+              "RelativeToolTip": "src\\App.js",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAIwKwAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-01T08:10:22.007Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",

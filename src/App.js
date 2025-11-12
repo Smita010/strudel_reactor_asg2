@@ -14,6 +14,7 @@ import PlaybackControls from "./components/PlaybackControls";
 import InstrumentControls from "./components/InstrumentControls";
 import TempoControl from "./components/TempoControl";
 import InstrumentSelector from "./components/InstrumentSelector";
+import D3Graph from "./components/D3Graph";
 
 let globalEditor = null;
 
@@ -67,6 +68,8 @@ export default function StrudelDemo() {
 
 const hasRun = useRef(false);
 const [text, setText] = useState('<p1_Radio> ' + stranger_tune);
+const [bpm, setBpm] = useState(120);
+
 
 useEffect(() => {
 
@@ -154,9 +157,10 @@ useEffect(() => {
                             onStop={() => globalEditor?.stop()}
                         />
                         <TempoControl
-                            onChange={(bpm) => {
+                            onChange={(value) => {
+                                setBpm(value);
                                 if (typeof window.setcps === "function") {
-                                    window.setcps(bpm / 60 / 4);
+                                    window.setcps(value / 60 / 4);
                                 }
                             }}
                         />
@@ -167,6 +171,7 @@ useEffect(() => {
                                 ProcAndPlay();
                             }}
                         />
+                        <D3Graph bpm={bpm} />
                     </div>
                 </div>
                 <canvas id="roll" className="mt-4"></canvas>

@@ -35,9 +35,9 @@ export function SetupButtons() {
     )
 }
 
-export function ProcAndPlay(p1Mode) {
+export function ProcAndPlay(p1Mode, instrument) {
     if (globalEditor != null && globalEditor.repl.state.started === true) {
-        Proc(p1Mode);
+        Proc(p1Mode, instrument);
         globalEditor.evaluate();
     }
 }
@@ -56,7 +56,7 @@ function generateStrudelCode(state, text) {
     return output;
 }
 
-export function Proc(p1Mode) {
+export function Proc(p1Mode, instrument) {
     if (!globalEditor) {
         console.warn("Strudel editor not ready yet");
         return;
@@ -66,7 +66,7 @@ export function Proc(p1Mode) {
 
     const currentState = {
         p1: p1Mode,
-        instrument: document.getElementById("instrumentSelect")?.value || "supersaw",
+        instrument: instrument,
     };
 
     const newCode = generateStrudelCode(currentState, text);
@@ -79,6 +79,7 @@ export default function StrudelDemo() {
     const [bpm, setBpm] = useState(120);
     const [isPlaying, setIsPlaying] = useState(false);
     const [p1Mode, setP1Mode] = useState("on");  
+    const [instrument, setInstrument] = useState("supersaw");
 
 
     const handleD3Data = (event) => {
@@ -141,12 +142,9 @@ export default function StrudelDemo() {
                             <div className="card-body">
                                 <h5 className="text-primary">Processed Output Preview</h5>
                                 <pre className="code-preview">
-                                    {text.replaceAll(
-                                        "<p1_Radio>",
-                                        (typeof document !== "undefined" &&
-                                            document.getElementById("flexRadioDefault2")?.checked)
-                                            ? "_"
-                                            : ""
+                                    {generateStrudelCode(
+                                        { p1: p1Mode, instrument: instrument },
+                                        text
                                     )}
                                 </pre>
                             </div>
@@ -162,9 +160,9 @@ export default function StrudelDemo() {
                     </div>
                     <div className="col-md-4">
                         <PlaybackControls
-                            onProcess={() => Proc(p1Mode)}
+                            onProcess={() => Proc(p1Mode, instrument)}
                             onProcessPlay={() => {
-                                Proc(p1Mode);
+                                Proc(p1Mode, instrument);
                                 globalEditor?.evaluate();
                                 setIsPlaying(true);
                             }}
@@ -188,13 +186,13 @@ export default function StrudelDemo() {
                         <InstrumentControls
                             onToggle={(mode) => {
                                 setP1Mode(mode);
-                                ProcAndPlay(mode);
+                                ProcAndPlay(mode, instrument);
                             }}
                         />
                         <InstrumentSelector
-                            onChange={(instrument) => {
-                                console.log("Instrument changed to:", instrument);
-                                ProcAndPlay(p1Mode);
+                            onChange={(value) => {
+                                setInstrument(value);
+                                ProcAndPlay(p1Mode, value);
                             }}
                         />
                         <D3Graph bpm={bpm} isPlaying={isPlaying} />

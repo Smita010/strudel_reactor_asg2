@@ -43,23 +43,33 @@ export function ProcAndPlay() {
     }
 }
 
-export function Proc() {
+function generateStrudelCode(state, text) {
+    const replacements = {
+        "<p1_Radio>": state.p1 === "hush" ? "_" : "",
+        "<instrument>": state.instrument || "",
+    };
 
-    let proc_text = document.getElementById('proc').value || "";
-    let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
-    ProcessText(proc_text);
-    globalEditor.setCode(proc_text_replaced)
-}
-
-export function ProcessText(match, ...args) {
-
-    let replace = ""
-    if (document.getElementById('flexRadioDefault2').checked) {
-        replace = "_"
+    let output = text;
+    for (const token in replacements) {
+        output = output.replaceAll(token, replacements[token]);
     }
 
-    return replace
+    return output;
 }
+
+export function Proc() {
+
+    const text = document.getElementById('proc').value || "";
+
+    const currentState = {
+        p1: document.getElementById("flexRadioDefault2")?.checked ? "hush" : "on",
+        instrument: document.getElementById("instrumentSelect")?.value || "supersaw",
+    };
+
+    const newCode = generateStrudelCode(currentState, text);
+    globalEditor.setCode(newCode);
+}
+
 export default function StrudelDemo() {
     const hasRun = useRef(false);
     const [text, setText] = useState('<p1_Radio> ' + stranger_tune);

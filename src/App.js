@@ -35,10 +35,9 @@ export function SetupButtons() {
     )
 }
 
-export function ProcAndPlay() {
-    if (globalEditor != null && globalEditor.repl.state.started == true) {
-        console.log(globalEditor)
-        Proc()
+export function ProcAndPlay(p1Mode) {
+    if (globalEditor != null && globalEditor.repl.state.started === true) {
+        Proc(p1Mode);
         globalEditor.evaluate();
     }
 }
@@ -57,12 +56,16 @@ function generateStrudelCode(state, text) {
     return output;
 }
 
-export function Proc() {
+export function Proc(p1Mode) {
+    if (!globalEditor) {
+        console.warn("Strudel editor not ready yet");
+        return;
+    }
 
     const text = document.getElementById('proc').value || "";
 
     const currentState = {
-        p1: document.getElementById("flexRadioDefault2")?.checked ? "hush" : "on",
+        p1: p1Mode,
         instrument: document.getElementById("instrumentSelect")?.value || "supersaw",
     };
 
@@ -75,6 +78,8 @@ export default function StrudelDemo() {
     const [text, setText] = useState('<p1_Radio> ' + stranger_tune);
     const [bpm, setBpm] = useState(120);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [p1Mode, setP1Mode] = useState("on");  
+
 
     const handleD3Data = (event) => {
         console.log(event.detail);
@@ -157,9 +162,9 @@ export default function StrudelDemo() {
                     </div>
                     <div className="col-md-4">
                         <PlaybackControls
-                            onProcess={Proc}
+                            onProcess={() => Proc(p1Mode)}
                             onProcessPlay={() => {
-                                Proc();
+                                Proc(p1Mode);
                                 globalEditor?.evaluate();
                                 setIsPlaying(true);
                             }}
@@ -180,11 +185,16 @@ export default function StrudelDemo() {
                                 }
                             }}
                         />
-                        <InstrumentControls onToggle={ProcAndPlay} />
+                        <InstrumentControls
+                            onToggle={(mode) => {
+                                setP1Mode(mode);
+                                ProcAndPlay(mode);
+                            }}
+                        />
                         <InstrumentSelector
                             onChange={(instrument) => {
                                 console.log("Instrument changed to:", instrument);
-                                ProcAndPlay();
+                                ProcAndPlay(p1Mode);
                             }}
                         />
                         <D3Graph bpm={bpm} isPlaying={isPlaying} />

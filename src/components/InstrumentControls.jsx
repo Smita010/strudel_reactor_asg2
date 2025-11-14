@@ -11,7 +11,7 @@ export default function InstrumentControls({ onToggle }) {
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
-                        onChange={onToggle}
+                        onChange={() => onToggle("on")}
                         defaultChecked
                     />
                     <label className="form-check-label" htmlFor="flexRadioDefault1">
@@ -24,7 +24,7 @@ export default function InstrumentControls({ onToggle }) {
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
-                        onChange={onToggle}
+                        onChange={() => onToggle("hush")}
                     />
                     <label className="form-check-label" htmlFor="flexRadioDefault2">
                         p1: HUSH

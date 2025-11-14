@@ -8,31 +8,31 @@ import { transpiler } from '@strudel/transpiler';
 import { getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
-import console_monkey_patch, { getD3Data } from './console-monkey-patch';
+import console_monkey_patch from './console-monkey-patch';
 import PreprocessorEditor from './components/PreprocessorEditor';
 import PlaybackControls from "./components/PlaybackControls";
 import InstrumentControls from "./components/InstrumentControls";
 import TempoControl from "./components/TempoControl";
 import InstrumentSelector from "./components/InstrumentSelector";
 import D3Graph from "./components/D3Graph";
+import ReverbControl from "./components/ReverbControl";
+
 
 let globalEditor = null;
 
 export function SetupButtons() {
+    document.getElementById('play').addEventListener('click', () => {
+        globalEditor.evaluate();});
 
-    document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
-    document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
+    document.getElementById('stop').addEventListener('click', () => {
+        globalEditor.stop();});
+
     document.getElementById('process').addEventListener('click', () => {
-        Proc()
-    }
-    )
+        Proc(window.__uiState);});
+
     document.getElementById('process_play').addEventListener('click', () => {
-        if (globalEditor != null) {
-            Proc()
-            globalEditor.evaluate()
-        }
-    }
-    )
+        Proc(window.__uiState);
+        globalEditor.evaluate();});
 }
 export function ProcAndPlay(uiState) {
     if (!globalEditor) return;
@@ -47,6 +47,7 @@ function generateStrudelCode(state, text) {
     const replacements = {
         "<p1_Radio>": state.p1 === "hush" ? "_" : "",
         "<instrument>": state.instrument || "",
+        "<reverb>": String(state.reverb ?? 0.4)
     };
 
     let output = text;
@@ -81,13 +82,16 @@ export default function StrudelDemo() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [p1Mode, setP1Mode] = useState("on");  
     const [instrument, setInstrument] = useState("supersaw");
+    const [reverb, setReverb] = useState(0.4);
 
     const uiState = {
         p1: p1Mode,
         instrument: instrument,
         bpm: bpm,
         isPlaying: isPlaying,
+        reverb: reverb
     };
+    window.__uiState = uiState;
 
     const handleD3Data = (event) => {
         console.log(event.detail);
@@ -128,9 +132,9 @@ export default function StrudelDemo() {
             
             document.getElementById('proc').value = stranger_tune
             SetupButtons()
-            Proc()
+            Proc(window.__uiState)
         }
-    }, []);
+    }, [ ]);
 
     return (
         <div className="container mt-4">
@@ -150,7 +154,7 @@ export default function StrudelDemo() {
                                 <h5 className="text-primary">Processed Output Preview</h5>
                                 <pre className="code-preview">
                                     {generateStrudelCode(
-                                        { p1: p1Mode, instrument: instrument },
+                                        { p1: p1Mode, instrument: instrument, reverb: reverb },
                                         text
                                     )}
                                 </pre>
@@ -202,6 +206,18 @@ export default function StrudelDemo() {
                                 setInstrument(value);
                                 const newState = { ...uiState, instrument: value };
                                 ProcAndPlay(newState);
+                            }}
+                        />
+                        <ReverbControl
+                            value={reverb}
+                            onChange={(v) => {
+                                setReverb(v);
+                                const updatedState = {
+                                    ...uiState,
+                                    reverb: v
+                                };
+                                window.__uiState = updatedState;
+                                ProcAndPlay(updatedState);
                             }}
                         />
                         <D3Graph bpm={bpm} isPlaying={isPlaying} />

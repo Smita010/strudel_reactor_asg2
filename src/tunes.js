@@ -7,7 +7,7 @@ samples('https://raw.githubusercontent.com/Mittans/tidal-drum-machines/main/mach
 const gain_patterns = [
   "2",
   "{0.75 2.5}*4",
-    "{0.75 2.5!9 0.75 2.5!5 0.75 2.5 0.75 2.5!7 0.75 2.5!3 <2.5 0.75> 2.5}%16",
+  "{0.75 2.5!9 0.75 2.5!5 0.75 2.5 0.75 2.5!7 0.75 2.5!3 <2.5 0.75> 2.5}%16",
 ]
 
 const drum_structure = [
@@ -35,7 +35,6 @@ const arpeggiator2 = [
 "{d5 bb4 g4 d4 bb3 g3 d4 bb3 eb3 d3 bb2 eb2}%16",
 ]
 
-
 const pattern = 0
 const bass = 0
 
@@ -43,21 +42,20 @@ bassline:
 note(pick(basslines, bass))
 .sound("supersaw")
 .postgain(2)
-.room(0.6)
+.room(<reverb>)
 .lpf(700)
-.room(0.4)
+.room(<reverb>)
+.size(<reverb> * 4)
 .postgain(pick(gain_patterns, pattern))
 
-
-main_arp: 
+main_arp:
 note(pick(arpeggiator1, "<0 1 2 3>/2"))
 .sound("supersaw")
 .lpf(300)
 .adsr("0:0:.5:.1")
-.room(0.6)
+.room(<reverb>)
 .lpenv(3.3)
 .postgain(pick(gain_patterns, pattern))
-
 
 drums:
 stack(
@@ -70,22 +68,28 @@ stack(
   s("sh").struct("[x!3 ~!2 x!10 ~]")
   .postgain(0.5).lpf(7000)
   .bank("RolandTR808")
-  .speed(0.8).jux(rev).room(sine.range(0.1,0.4)).gain(0.6),
+  .speed(0.8)
+  .jux(rev)
+  .room(<reverb>)
+  .gain(0.6),
+  .size(<reverb> * 4)
+
 
   s("{~ ~ rim ~ cp ~ rim cp ~!2 rim ~ cp ~ < rim ~ >!2}%8 *2")
   .bank("[KorgDDM110, OberheimDmx]").speed(1.2)
-  .postgain(.25),
+  .postgain(.25)
 )
+.room(<reverb>)
 
-drums2: 
+drums2:
 stack(
-  s("[~ hh]*4").bank("RolandTR808").room(0.3).speed(0.75).gain(1.2),
+  s("[~ hh]*4").bank("RolandTR808").room(<reverb>).speed(0.75).gain(1.2),
   s("hh").struct("x*16").bank("RolandTR808")
   .gain(0.6)
   .jux(rev)
-  .room(sine.range(0.1,0.4))
+  .room(<reverb>)
   .postgain(0.5),
-  
+
   s("[psr:[2|5|6|7|8|9|12|24|25]*16]?0.1")
   .gain(0.1)
   .postgain(pick(gain_patterns, pattern))
@@ -93,6 +97,7 @@ stack(
   .speed(0.5)
   .rarely(jux(rev)),
 )
+.room(<reverb>)
 //Remixed and reproduced from Algorave Dave's code found here: https://www.youtube.com/watch?v=ZCcpWzhekEY
 // all(x => x.gain(mouseX.range(0,1)))
 // all(x => x.log())

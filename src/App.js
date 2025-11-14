@@ -34,10 +34,11 @@ export function SetupButtons() {
     }
     )
 }
+export function ProcAndPlay(uiState) {
+    if (!globalEditor) return;
 
-export function ProcAndPlay(p1Mode, instrument) {
-    if (globalEditor != null && globalEditor.repl.state.started === true) {
-        Proc(p1Mode, instrument);
+    if (globalEditor.repl.state.started === true) {
+        Proc(uiState);
         globalEditor.evaluate();
     }
 }
@@ -56,7 +57,7 @@ function generateStrudelCode(state, text) {
     return output;
 }
 
-export function Proc(p1Mode, instrument) {
+export function Proc(uiState) {
     if (!globalEditor) {
         console.warn("Strudel editor not ready yet");
         return;
@@ -65,8 +66,8 @@ export function Proc(p1Mode, instrument) {
     const text = document.getElementById('proc').value || "";
 
     const currentState = {
-        p1: p1Mode,
-        instrument: instrument,
+        p1: uiState.p1,
+        instrument: uiState.instrument,
     };
 
     const newCode = generateStrudelCode(currentState, text);
@@ -81,6 +82,12 @@ export default function StrudelDemo() {
     const [p1Mode, setP1Mode] = useState("on");  
     const [instrument, setInstrument] = useState("supersaw");
 
+    const uiState = {
+        p1: p1Mode,
+        instrument: instrument,
+        bpm: bpm,
+        isPlaying: isPlaying,
+    };
 
     const handleD3Data = (event) => {
         console.log(event.detail);
@@ -160,9 +167,9 @@ export default function StrudelDemo() {
                     </div>
                     <div className="col-md-4">
                         <PlaybackControls
-                            onProcess={() => Proc(p1Mode, instrument)}
+                            onProcess={() => Proc(uiState)}
                             onProcessPlay={() => {
-                                Proc(p1Mode, instrument);
+                                Proc(uiState)
                                 globalEditor?.evaluate();
                                 setIsPlaying(true);
                             }}
@@ -186,13 +193,15 @@ export default function StrudelDemo() {
                         <InstrumentControls
                             onToggle={(mode) => {
                                 setP1Mode(mode);
-                                ProcAndPlay(mode, instrument);
+                                const newState = { ...uiState, p1: mode };
+                                ProcAndPlay(newState);
                             }}
                         />
                         <InstrumentSelector
                             onChange={(value) => {
                                 setInstrument(value);
-                                ProcAndPlay(p1Mode, value);
+                                const newState = { ...uiState, instrument: value };
+                                ProcAndPlay(newState);
                             }}
                         />
                         <D3Graph bpm={bpm} isPlaying={isPlaying} />

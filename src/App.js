@@ -16,6 +16,7 @@ import TempoControl from "./components/TempoControl";
 import InstrumentSelector from "./components/InstrumentSelector";
 import D3Graph from "./components/D3Graph";
 import ReverbControl from "./components/ReverbControl";
+import ArpSelector from "./components/ArpSelector";
 
 
 let globalEditor = null;
@@ -44,10 +45,19 @@ export function ProcAndPlay(uiState) {
 }
 
 function generateStrudelCode(state, text) {
+    let arpCode = `pick(arpeggiator1, "<0 1 2 3>/2")`; 
+
+    if (state.arpMode === "arp2") {
+        arpCode = `pick(arpeggiator2, "<0 1 2 3>/2")`;
+    } else if (state.arpMode === "combo") {
+        arpCode = `pick(arpeggiator1, "<0 1 2 3>/2") # pick(arpeggiator2, "<0 1 2 3>/2") / 2`;
+    }
+
     const replacements = {
         "<p1_Radio>": state.p1 === "hush" ? "_" : "",
         "<instrument>": state.instrument || "",
-        "<reverb>": String(state.reverb ?? 0.4)
+        "<reverb>": String(state.reverb ?? 0.4),
+        "<arp_mode>": arpCode
     };
 
     let output = text;
@@ -69,6 +79,8 @@ export function Proc(uiState) {
     const currentState = {
         p1: uiState.p1,
         instrument: uiState.instrument,
+        reverb: uiState.reverb,
+        arpMode: uiState.arpMode
     };
 
     const newCode = generateStrudelCode(currentState, text);
@@ -83,13 +95,17 @@ export default function StrudelDemo() {
     const [p1Mode, setP1Mode] = useState("on");  
     const [instrument, setInstrument] = useState("supersaw");
     const [reverb, setReverb] = useState(0.4);
+    const [arpMode, setArpMode] = useState("arp1");
+
 
     const uiState = {
         p1: p1Mode,
         instrument: instrument,
         bpm: bpm,
         isPlaying: isPlaying,
-        reverb: reverb
+        reverb: reverb,
+        arpMode: arpMode,
+
     };
     window.__uiState = uiState;
 
@@ -206,6 +222,13 @@ export default function StrudelDemo() {
                                 setInstrument(value);
                                 const newState = { ...uiState, instrument: value };
                                 ProcAndPlay(newState);
+                            }}
+                        />
+                        <ArpSelector
+                            value={arpMode}
+                            onChange={(value) => {
+                                setArpMode(value);
+                                ProcAndPlay({ ...uiState, arpMode: value });
                             }}
                         />
                         <ReverbControl

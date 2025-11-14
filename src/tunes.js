@@ -47,7 +47,7 @@ note(pick(basslines, bass))
 .postgain(pick(gain_patterns, pattern))
 
 main_arp:
-note(pick(arpeggiator1, "<0 1 2 3>/2"))
+note(<arp_mode>)
 .sound("<instrument>")
 .lpf(300)
 .adsr("0:0:.5:.1")

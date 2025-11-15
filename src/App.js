@@ -57,7 +57,8 @@ function generateStrudelCode(state, text) {
         "<p1_Radio>": state.p1 === "hush" ? "_" : "",
         "<instrument>": state.instrument || "",
         "<reverb>": String(state.reverb ?? 0.4),
-        "<arp_mode>": arpCode
+        "<arp_mode>": arpCode,
+        "<master>": String(state.master ?? 1)
     };
 
     let output = text;
@@ -80,7 +81,8 @@ export function Proc(uiState) {
         p1: uiState.p1,
         instrument: uiState.instrument,
         reverb: uiState.reverb,
-        arpMode: uiState.arpMode
+        arpMode: uiState.arpMode,
+        master: uiState.master  
     };
 
     const newCode = generateStrudelCode(currentState, text);
@@ -96,6 +98,7 @@ export default function StrudelDemo() {
     const [instrument, setInstrument] = useState("supersaw");
     const [reverb, setReverb] = useState(0.4);
     const [arpMode, setArpMode] = useState("arp1");
+    const [master, setMaster] = useState(1);
 
 
     const uiState = {
@@ -105,6 +108,7 @@ export default function StrudelDemo() {
         isPlaying: isPlaying,
         reverb: reverb,
         arpMode: arpMode,
+        master: master,
 
     };
     window.__uiState = uiState;
@@ -158,6 +162,7 @@ export default function StrudelDemo() {
             <main>
                 <div className="row">
                     <div className="col-md-8">
+                        <D3Graph bpm={bpm} isPlaying={isPlaying} />
                         <div className="card shadow-sm mb-3">
                             <div className="card-body">
                                 <h5 className="text-primary">Preprocessor Editor</h5>
@@ -170,7 +175,7 @@ export default function StrudelDemo() {
                                 <h5 className="text-primary">Processed Output Preview</h5>
                                 <pre className="code-preview">
                                     {generateStrudelCode(
-                                        { p1: p1Mode, instrument: instrument, reverb: reverb },
+                                        { p1: p1Mode, instrument: instrument, reverb: reverb, master: master},
                                         text
                                     )}
                                 </pre>
@@ -243,7 +248,21 @@ export default function StrudelDemo() {
                                 ProcAndPlay(updatedState);
                             }}
                         />
-                        <D3Graph bpm={bpm} isPlaying={isPlaying} />
+                        <div className="card shadow-sm p-2 mb-2">
+                            <label className="form-label">Master Volume</label>
+                            <input
+                                type="range"
+                                min="0"
+                                max="2"
+                                step="0.1"
+                                value={master}
+                                onChange={(e) => {
+                                    setMaster(parseFloat(e.target.value));
+                                    const newState = { ...uiState, master: parseFloat(e.target.value) };
+                                    ProcAndPlay(newState);
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
                 <canvas id="roll" className="mt-4"></canvas>

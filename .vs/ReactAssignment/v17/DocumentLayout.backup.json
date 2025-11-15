@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\d3graph.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\d3graph.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\playbackcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\playbackcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\instrumentcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\instrumentcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +22,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlaybackControls.jsx",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\PlaybackControls.jsx",
+              "RelativeDocumentMoniker": "src\\components\\PlaybackControls.jsx",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\PlaybackControls.jsx",
+              "RelativeToolTip": "src\\components\\PlaybackControls.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-11-14T02:50:20.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InstrumentControls.jsx",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\InstrumentControls.jsx",
+              "RelativeDocumentMoniker": "src\\components\\InstrumentControls.jsx",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\InstrumentControls.jsx",
+              "RelativeToolTip": "src\\components\\InstrumentControls.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-11-14T02:44:30.937Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -45,34 +75,21 @@
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "D3Graph.jsx",
-              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\D3Graph.jsx",
-              "RelativeDocumentMoniker": "src\\components\\D3Graph.jsx",
-              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\D3Graph.jsx",
-              "RelativeToolTip": "src\\components\\D3Graph.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-11-12T03:56:27.617Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "App.js",
               "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
               "RelativeDocumentMoniker": "src\\App.js",
               "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
               "RelativeToolTip": "src\\App.js",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAcwK0AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAmwDsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-02T05:33:40.858Z",
+              "WhenOpened": "2025-11-14T02:43:53.131Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         }

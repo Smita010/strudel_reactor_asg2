@@ -42,6 +42,7 @@ bassline:
 note(pick(basslines, bass))
 .sound("<instrument>")
 .postgain(2)
+.postgain(<master>)
 .room(<reverb>)
 .lpf(700)
 .postgain(pick(gain_patterns, pattern))
@@ -54,11 +55,14 @@ note(<arp_mode>)
 .room(<reverb>)
 .lpenv(3.3)
 .postgain(pick(gain_patterns, pattern))
+.postgain(<master>)
+
 
 drums:
 stack(
   s("tech:5")
     .postgain(6)
+    .postgain(<master>)
     .pcurve(2)
     .pdec(1)
     .struct(pick(drum_structure, pattern)),
@@ -66,6 +70,7 @@ stack(
   s("sh")
     .struct("[x!3 ~!2 x!10 ~]")
     .postgain(0.5)
+    .postgain(<master>)
     .lpf(7000)
     .bank("RolandTR808")
     .speed(0.8)
@@ -76,6 +81,7 @@ stack(
     .bank("[KorgDDM110, OberheimDmx]")
     .speed(1.2)
     .postgain(.25)
+    .postgain(<master>)
 )
 
 drums2:
@@ -97,6 +103,7 @@ stack(
   s("[psr:[2|5|6|7|8|9|12|24|25]*16]?0.1")
     .gain(0.1)
     .postgain(pick(gain_patterns, pattern))
+    .postgain(<master>)
     .hpf(1000)
     .speed(0.5)
     .rarely(jux(rev))

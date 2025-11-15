@@ -157,40 +157,33 @@ export default function StrudelDemo() {
     }, [ ]);
 
     return (
-        <div className="container mt-4">
+        <div>
             <h2 className="text-center mb-3">Strudel Demo</h2>
             <main>
                 <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-md-10">
                         <D3Graph bpm={bpm} isPlaying={isPlaying} />
-                        <div className="card shadow-sm mb-3">
-                            <div className="card-body">
-                                <h5 className="text-primary">Preprocessor Editor</h5>
-                                <PreprocessorEditor value={text} onChange={setText} />
+                        <div className="row equal-cards">
+                            <div className="col-md-6 h-100">
+                                <div className="card h-100">
+                                    <div className="card-body">
+                                        <h5 className="text-primary">Preprocessor Editor</h5>
+                                        <PreprocessorEditor value={text} onChange={setText} />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="card shadow-sm mb-3">
-                            <div className="card-body">
-                                <h5 className="text-primary">Processed Output Preview</h5>
-                                <pre className="code-preview">
-                                    {generateStrudelCode(
-                                        { p1: p1Mode, instrument: instrument, reverb: reverb, master: master},
-                                        text
-                                    )}
-                                </pre>
-                            </div>
-                        </div>
-
-                        <div className="card shadow-sm">
-                            <div className="card-body">
-                                <h5 className="text-primary">Live Strudel Output</h5>
-                                <div id="editor" />
-                                <div id="output" />
+                            <div className="col-md-6 h-100">
+                                <div className="card h-100">
+                                    <div className="card-body">
+                                        <h5 className="text-primary">Live Strudel Output</h5>
+                                        <div id="editor"></div>
+                                        <div id="output"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-2 playback-column">
                         <PlaybackControls
                             onProcess={() => Proc(uiState)}
                             onProcessPlay={() => {

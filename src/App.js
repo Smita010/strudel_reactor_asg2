@@ -163,17 +163,17 @@ export default function StrudelDemo() {
                 <div className="row">
                     <div className="col-md-10">
                         <D3Graph bpm={bpm} isPlaying={isPlaying} />
-                        <div className="row equal-cards">
-                            <div className="col-md-6 h-100">
-                                <div className="card h-100">
+                        <div className="editor-panels">
+                            <div className="editor-card">
+                                <div className="card">
                                     <div className="card-body">
                                         <h5 className="text-primary">Preprocessor Editor</h5>
                                         <PreprocessorEditor value={text} onChange={setText} />
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-6 h-100">
-                                <div className="card h-100">
+                            <div className="editor-card">
+                                <div className="card">
                                     <div className="card-body">
                                         <h5 className="text-primary">Live Strudel Output</h5>
                                         <div id="editor"></div>
@@ -181,6 +181,7 @@ export default function StrudelDemo() {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div className="col-md-2 playback-column">

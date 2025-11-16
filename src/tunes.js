@@ -38,6 +38,8 @@ const arpeggiator2 = [
 const pattern = 0
 const bass = 0
 
+<p1_Radio>
+
 bassline:
 note(pick(basslines, bass))
 .sound("<instrument>")

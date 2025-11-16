@@ -14,11 +14,28 @@ export default function D3Graph({ bpm, isPlaying }) {
         svg.attr("width", width).attr("height", height);
 
         const barCount = 40;
+        const defs = svg.append("defs");
+
+        const gradient = defs.append("linearGradient")
+            .attr("id", "pinkGradient")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "0%")
+            .attr("y2", "100%"); 
+
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#f7b2c4");
+
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "#f78ca0"); 
+
         const data = Array.from({ length: barCount }, () => Math.random());
 
         const x = d3.scaleBand()
             .domain(d3.range(barCount))
-            .range([0, width])  
+            .range([0, width])
             .padding(0.1);
 
         const y = d3.scaleLinear()
@@ -34,7 +51,7 @@ export default function D3Graph({ bpm, isPlaying }) {
             .attr("width", x.bandwidth())
             .attr("y", d => y(d))
             .attr("height", d => height - y(d))
-            .attr("fill", "#007bff");
+            .attr("fill", "url(#pinkGradient)");  
 
         let phase = 0;
 

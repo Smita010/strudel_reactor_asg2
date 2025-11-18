@@ -331,3 +331,6 @@ Potential improvements for future iterations:
 - Responsive mobile layout
 - Real-time collaboration features
 - Audio export functionality
+
+## AI Usage
+- Chatgpt for Debugging and UI fixes

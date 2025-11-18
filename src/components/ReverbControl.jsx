@@ -1,5 +1,6 @@
 import React from "react";
 
+//  This component controls how much reverb is applied to the song
 export default function ReverbControl({ value, onChange }) {
     return (
         <div className="card shadow-sm mb-3">

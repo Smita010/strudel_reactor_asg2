@@ -1,5 +1,6 @@
 import React from 'react';
 
+//  This component is just the text editor area where the user edits the preprocessing template
 export default function PreprocessorEditor({ value, onChange }) {
     return (
         <div className="mb-3">

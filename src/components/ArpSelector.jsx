@@ -1,5 +1,7 @@
 import React from "react";
 
+// Simple dropdown component for choosing the arpeggiator mode.
+// The parent passes in the current value and an onChange callback.
 export default function ArpSelector({ value, onChange }) {
     return (
         <div className="card shadow-sm mb-3">

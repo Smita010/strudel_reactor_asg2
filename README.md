@@ -1,4 +1,4 @@
-# Strudel Reactor 
+# Strudel Demo 
 
 ## Overview
 
@@ -153,7 +153,7 @@ State is passed down using props and updated through callback functions
 - Uses requestAnimationFrame and D3 scales
 
 ### Video Demonstration 
-
+Link: https://youtu.be/QhApz6f3_zc
 A screen recording is included in the submission, showing:
 - How controls affect the music
 - Switching instruments

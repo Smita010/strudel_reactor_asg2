@@ -1,13 +1,18 @@
 import React from "react";
+
+// This component holds the main playback buttons for the app.
+
 export default function PlaybackControls({ onProcess, onProcessPlay, onPlay, onStop }) {
     return (
         <div className="card shadow-sm mb-3">
             <div className="card-body text-center">
                 <h5>Playback Controls</h5>
+
                 <div className="d-flex flex-wrap gap-2 justify-content-center">
                     <button onClick={onProcess} className="btn btn-sm">
                         Preprocess
                     </button>
+
                     <button onClick={onPlay} className="btn btn-sm">
                         Play
                     </button>

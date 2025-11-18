@@ -1,3 +1,6 @@
+  // This function takes the current UI state(sliders, radio buttons, selectors, etc.)
+  // and replaces the placeholder tags inside the user's Strudel template with the
+  // correct Strudel syntax.
 export function generateStrudelCode(state, text) {
     let arpCode = `pick(arpeggiator1, "<0 1 2 3>/2")`;
 
@@ -23,6 +26,7 @@ export function generateStrudelCode(state, text) {
     return output;
 }
 
+//  Runs the preprocessor and updates the Strudel editor with the fresh code
 export function applyPreprocessing(globalEditor, uiState, rawText) {
     if (!globalEditor) return;
 

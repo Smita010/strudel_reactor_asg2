@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
 
+
+//This component handles saving and loading the user’s settings as JSON
 export default function JsonControls({ uiState, onLoadState }) {
     const fileInputRef = useRef(null);
 
+    // Save current UI state to a JSON file
     const handleSave = () => {
         const dataStr = JSON.stringify(uiState, null, 2);
         const blob = new Blob([dataStr], { type: "application/json" });
@@ -15,6 +18,7 @@ export default function JsonControls({ uiState, onLoadState }) {
         URL.revokeObjectURL(url);
     };
 
+    // Load UI state from a selected JSON file
     const handleLoad = (event) => {
         const file = event.target.files[0];
         if (!file) return;
@@ -23,7 +27,7 @@ export default function JsonControls({ uiState, onLoadState }) {
         reader.onload = (e) => {
             try {
                 const loaded = JSON.parse(e.target.result);
-                onLoadState(loaded);
+                onLoadState(loaded); 
             } catch (err) {
                 alert("Invalid JSON file.");
             }
@@ -47,6 +51,7 @@ export default function JsonControls({ uiState, onLoadState }) {
                     Load JSON
                 </button>
 
+                {/* Hidden input for selecting JSON files */}
                 <input
                     type="file"
                     accept="application/json"

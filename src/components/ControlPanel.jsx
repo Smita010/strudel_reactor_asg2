@@ -24,6 +24,7 @@ export default function ControlPanel({
 
     return (
         <div className="col-md-2 playback-column">
+            {/* Basic play / stop / preprocess buttons */}
             <PlaybackControls
                 onProcess={() => applyPreprocessing(globalEditor, uiState, text)}
                 onProcessPlay={() => {
@@ -40,15 +41,17 @@ export default function ControlPanel({
                 }}
             />
 
+            {/* Tempo slider. Also updates Strudel's cycles-per-second value. */}
             <TempoControl
                 onChange={(value) => {
                     setBpm(value);
                     if (typeof window.setcps === "function") {
-                        window.setcps(value / 60 / 4);
+                        window.setcps(value / 60 / 3);
                     }
                 }}
             />
 
+            {/* p1 ON/HUSH radio buttons */}
             <InstrumentControls
                 onToggle={(mode) => {
                     setP1Mode(mode);
@@ -56,6 +59,7 @@ export default function ControlPanel({
                 }}
             />
 
+            {/* Dropdown to switch the main instrument */}
             <InstrumentSelector
                 onChange={(value) => {
                     setInstrument(value);
@@ -63,6 +67,7 @@ export default function ControlPanel({
                 }}
             />
 
+            {/* Arpeggiator mode selector */}
             <ArpSelector
                 value={arpMode}
                 onChange={(value) => {
@@ -71,6 +76,7 @@ export default function ControlPanel({
                 }}
             />
 
+            {/* Reverb amount slider */}
             <ReverbControl
                 value={reverb}
                 onChange={(v) => {
@@ -79,6 +85,7 @@ export default function ControlPanel({
                 }}
             />
 
+            {/* Master volume slider */}
             <div className="card shadow-sm">
                 <div className="card-body">
                     <label className="form-label">Master Volume</label>

@@ -1,5 +1,6 @@
 import React from "react";
 
+//   Simple slider for adjusting the tempo (BPM) of the track.
 export default function TempoControl({ onChange }) {
     return (
         <div className="card shadow-sm mb-3">

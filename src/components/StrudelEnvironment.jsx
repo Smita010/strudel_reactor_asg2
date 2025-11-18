@@ -14,6 +14,8 @@ import console_monkey_patch from "../console-monkey-patch";
 
 let globalEditor = null;
 
+//  This component sets up the actual Strudel editor 
+//It only runs once when the page loads because StrudelMirror cannot be re-initialised inside React re-renders without breaking audio playback
 export default function StrudelEnvironment({
     uiState,
     text,
@@ -63,8 +65,13 @@ export default function StrudelEnvironment({
             },
         });
 
-        applyPreprocessing(globalEditor, uiState, stranger_tune);
-    }, []);
+        setTimeout(() => {
+            if (globalEditor) {
+                applyPreprocessing(globalEditor, uiState, stranger_tune);
+            }
+        }, 800); 
+
+    }, []); 
 
     return (
         <div>

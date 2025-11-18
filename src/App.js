@@ -21,17 +21,20 @@ export default function StrudelDemo() {
   const uiState = { p1: p1Mode, instrument, bpm, isPlaying, reverb, arpMode, master };
 
   return (
-    <div>
+      <div>
+       {/* App Title */}
       <h2 className="text-center mb-3">Strudel Demo</h2>
       <main>
         <div className="row">
           <div className="col-md-10">
+            {/* D3 live graph, responds to BPM + playback state */}
             <D3Graph bpm={bpm} isPlaying={isPlaying} />
             <div className="editor-panels">
               <div className="editor-card">
                 <div className="card">
                   <div className="card-body">
                     <h5>Preprocessor Editor</h5>
+                    {/* Textarea for editing raw Strudel pattern + tokens */}
                     <PreprocessorEditor value={text} onChange={setText} />
                   </div>
                 </div>
@@ -40,6 +43,7 @@ export default function StrudelDemo() {
                 <div className="card">
                   <div className="card-body">
                     <h5>Live Strudel Output</h5>
+                    {/* This component handles Strudel REPL + pianoroll render */}
                     <StrudelEnvironment
                       uiState={uiState}
                       text={text}
@@ -50,6 +54,7 @@ export default function StrudelDemo() {
                 </div>
               </div>
             </div>
+             {/* Save/Load JSON section */}
             <div className="json-spacing">
               <div className="json-wrapper">
                 <JsonControls
@@ -67,6 +72,7 @@ export default function StrudelDemo() {
               </div>
             </div>
           </div>
+          {/* All audio controls grouped in one component*/}
           <ControlPanel
             uiState={uiState}
             text={text}
@@ -81,6 +87,7 @@ export default function StrudelDemo() {
             applyPreprocessing={applyPreprocessing}
           />
         </div>
+        {/* Canvas for Strudel pianoroll animation */}
         <canvas id="roll" className="mt-4"></canvas>
       </main>
     </div>

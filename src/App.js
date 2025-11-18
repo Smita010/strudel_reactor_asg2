@@ -17,129 +17,69 @@ import InstrumentSelector from "./components/InstrumentSelector";
 import D3Graph from "./components/D3Graph";
 import ReverbControl from "./components/ReverbControl";
 import ArpSelector from "./components/ArpSelector";
-
+import { applyPreprocessing, applyAndPlay } from "./utils/preprocessor";
 
 let globalEditor = null;
-
-export function ProcAndPlay(uiState) {
-    if (!globalEditor) return;
-
-    if (globalEditor.repl.state.started === true) {
-        Proc(uiState);
-        globalEditor.evaluate();
-    }
-}
-
-function generateStrudelCode(state, text) {
-    let arpCode = `pick(arpeggiator1, "<0 1 2 3>/2")`; 
-
-    if (state.arpMode === "arp2") {
-        arpCode = `pick(arpeggiator2, "<0 1 2 3>/2")`;
-    } else if (state.arpMode === "combo") {
-        arpCode = `pick(arpeggiator1, "<0 1 2 3>/2") # pick(arpeggiator2, "<0 1 2 3>/2") / 2`;
-    }
-
-    const replacements = {
-        "<p1_Radio>": state.p1 === "hush" ? "_" : "",
-        "<instrument>": state.instrument || "",
-        "<reverb>": String(state.reverb ?? 0.4),
-        "<arp_mode>": arpCode,
-        "<master>": String(state.master ?? 1)
-    };
-
-    let output = text;
-    for (const token in replacements) {
-        output = output.replaceAll(token, replacements[token]);
-    }
-
-    return output;
-}
-
-export function Proc(uiState) {
-    if (!globalEditor) {
-        console.warn("Strudel editor not ready yet");
-        return;
-    }
-
-    const text = document.getElementById('proc').value || "";
-
-    const currentState = {
-        p1: uiState.p1,
-        instrument: uiState.instrument,
-        reverb: uiState.reverb,
-        arpMode: uiState.arpMode,
-        master: uiState.master  
-    };
-
-    const newCode = generateStrudelCode(currentState, text);
-    globalEditor.setCode(newCode);
-}
 
 export default function StrudelDemo() {
     const hasRun = useRef(false);
     const [text, setText] = useState('<p1_Radio> ' + stranger_tune);
     const [bpm, setBpm] = useState(120);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [p1Mode, setP1Mode] = useState("on");  
+    const [p1Mode, setP1Mode] = useState("on");
     const [instrument, setInstrument] = useState("supersaw");
     const [reverb, setReverb] = useState(0.4);
     const [arpMode, setArpMode] = useState("arp1");
     const [master, setMaster] = useState(1);
 
-
     const uiState = {
         p1: p1Mode,
-        instrument: instrument,
-        bpm: bpm,
-        isPlaying: isPlaying,
-        reverb: reverb,
-        arpMode: arpMode,
-        master: master,
-
-    };
-    window.__uiState = uiState;
-
-    const handleD3Data = (event) => {
-        console.log(event.detail);
+        instrument,
+        bpm,
+        isPlaying,
+        reverb,
+        arpMode,
+        master
     };
 
     useEffect(() => {
-
         if (!hasRun.current) {
-            document.addEventListener("d3Data", handleD3Data);
-            console_monkey_patch();
             hasRun.current = true;
-            //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
-                //init canvas
-                const canvas = document.getElementById('roll');
-                canvas.width = canvas.width * 2;
-                canvas.height = canvas.height * 2;
-                const drawContext = canvas.getContext('2d');
-                const drawTime = [-2, 2]; // time window of drawn haps
-                globalEditor = new StrudelMirror({
-                    defaultOutput: webaudioOutput,
-                    getTime: () => getAudioContext().currentTime,
-                    transpiler,
-                    root: document.getElementById('editor'),
-                    drawTime,
-                    onDraw: (haps, time) => drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 }),
-                    prebake: async () => {
-                        initAudioOnFirstClick(); // needed to make the browser happy (don't await this here..)
-                        const loadModules = evalScope(
-                            import('@strudel/core'),
-                            import('@strudel/draw'),
-                            import('@strudel/mini'),
-                            import('@strudel/tonal'),
-                            import('@strudel/webaudio'),
-                        );
-                        await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
-                    },
-                });
-            
-            document.getElementById('proc').value = stranger_tune
-            Proc(window.__uiState)
+            console_monkey_patch();
+
+            document.addEventListener("d3Data", (event) => {
+                console.log(event.detail);
+            });
+            const canvas = document.getElementById('roll');
+            canvas.width = canvas.width * 2;
+            canvas.height = canvas.height * 2;
+            const drawContext = canvas.getContext('2d');
+            const drawTime = [-2, 2];
+            globalEditor = new StrudelMirror({
+                defaultOutput: webaudioOutput,
+                getTime: () => getAudioContext().currentTime,
+                transpiler,
+                root: document.getElementById('editor'),
+                drawTime,
+                onDraw: (haps, time) =>
+                    drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 }),
+
+                prebake: async () => {
+                    initAudioOnFirstClick();
+                    const loadModules = evalScope(
+                        import('@strudel/core'),
+                        import('@strudel/draw'),
+                        import('@strudel/mini'),
+                        import('@strudel/tonal'),
+                        import('@strudel/webaudio'),
+                    );
+                    await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
+                },
+            });
+
+            applyPreprocessing(globalEditor, uiState, stranger_tune);
         }
-    }, [ ]);
+    }, []); 
 
     return (
         <div>
@@ -166,15 +106,13 @@ export default function StrudelDemo() {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div className="col-md-2 playback-column">
                         <PlaybackControls
-                            onProcess={() => Proc(uiState)}
+                            onProcess={() => applyPreprocessing(globalEditor, uiState, text)}
                             onProcessPlay={() => {
-                                Proc(uiState)
-                                globalEditor?.evaluate();
+                                applyAndPlay(globalEditor, uiState, text);
                                 setIsPlaying(true);
                             }}
                             onPlay={() => {
@@ -197,34 +135,27 @@ export default function StrudelDemo() {
                         <InstrumentControls
                             onToggle={(mode) => {
                                 setP1Mode(mode);
-                                const newState = { ...uiState, p1: mode };
-                                ProcAndPlay(newState);
+                                applyAndPlay(globalEditor, { ...uiState, p1: mode }, text);
                             }}
                         />
                         <InstrumentSelector
                             onChange={(value) => {
                                 setInstrument(value);
-                                const newState = { ...uiState, instrument: value };
-                                ProcAndPlay(newState);
+                                applyAndPlay(globalEditor, { ...uiState, instrument: value }, text);
                             }}
                         />
                         <ArpSelector
                             value={arpMode}
                             onChange={(value) => {
                                 setArpMode(value);
-                                ProcAndPlay({ ...uiState, arpMode: value });
+                                applyAndPlay(globalEditor, { ...uiState, arpMode: value }, text);
                             }}
                         />
                         <ReverbControl
                             value={reverb}
                             onChange={(v) => {
                                 setReverb(v);
-                                const updatedState = {
-                                    ...uiState,
-                                    reverb: v
-                                };
-                                window.__uiState = updatedState;
-                                ProcAndPlay(updatedState);
+                                applyAndPlay(globalEditor, { ...uiState, reverb: v }, text);
                             }}
                         />
                         <div className="card shadow-sm p-2 mb-2">
@@ -236,9 +167,9 @@ export default function StrudelDemo() {
                                 step="0.1"
                                 value={master}
                                 onChange={(e) => {
-                                    setMaster(parseFloat(e.target.value));
-                                    const newState = { ...uiState, master: parseFloat(e.target.value) };
-                                    ProcAndPlay(newState);
+                                    const val = parseFloat(e.target.value);
+                                    setMaster(val);
+                                    applyAndPlay(globalEditor, { ...uiState, master: val }, text);
                                 }}
                             />
                         </div>

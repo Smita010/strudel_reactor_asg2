@@ -4,7 +4,7 @@ export default function InstrumentSelector({ onChange }) {
     return (
         <div className="card shadow-sm mb-3">
             <div className="card-body">
-                <h5 className="text-primary mb-2">Select Instrument</h5>
+                <h5>Select Instrument</h5>
                 <select
                     id="instrumentSelect"
                     className="form-select"

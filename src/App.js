@@ -17,6 +17,7 @@ import InstrumentSelector from "./components/InstrumentSelector";
 import D3Graph from "./components/D3Graph";
 import ReverbControl from "./components/ReverbControl";
 import ArpSelector from "./components/ArpSelector";
+import JsonControls from "./components/JsonControls";
 import { applyPreprocessing, applyAndPlay } from "./utils/preprocessor";
 
 let globalEditor = null;
@@ -92,7 +93,7 @@ export default function StrudelDemo() {
                             <div className="editor-card">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h5 className="text-primary">Preprocessor Editor</h5>
+                                        <h5>Preprocessor Editor</h5>
                                         <PreprocessorEditor value={text} onChange={setText} />
                                     </div>
                                 </div>
@@ -100,11 +101,28 @@ export default function StrudelDemo() {
                             <div className="editor-card">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h5 className="text-primary">Live Strudel Output</h5>
+                                        <h5>Live Strudel Output</h5>
                                         <div id="editor"></div>
                                         <div id="output"></div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="json-spacing">
+                            <div className="json-wrapper">
+                                <JsonControls
+                                    uiState={uiState}
+                                    onLoadState={(loaded) => {
+                                        setP1Mode(loaded.p1 ?? "on");
+                                        setInstrument(loaded.instrument ?? "supersaw");
+                                        setBpm(loaded.bpm ?? 120);
+                                        setReverb(loaded.reverb ?? 0.4);
+                                        setArpMode(loaded.arpMode ?? "arp1");
+                                        setMaster(loaded.master ?? 1);
+
+                                        applyAndPlay(globalEditor, loaded, text);
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -158,20 +176,22 @@ export default function StrudelDemo() {
                                 applyAndPlay(globalEditor, { ...uiState, reverb: v }, text);
                             }}
                         />
-                        <div className="card shadow-sm p-2 mb-2">
-                            <label className="form-label">Master Volume</label>
-                            <input
-                                type="range"
-                                min="0"
-                                max="2"
-                                step="0.1"
-                                value={master}
-                                onChange={(e) => {
-                                    const val = parseFloat(e.target.value);
-                                    setMaster(val);
-                                    applyAndPlay(globalEditor, { ...uiState, master: val }, text);
-                                }}
-                            />
+                        <div className="card shadow-sm">
+                            <div className="card-body">
+                                <label className="form-label">Master Volume</label>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="2"
+                                    step="0.1"
+                                    value={master}
+                                    onChange={(e) => {
+                                        const val = parseFloat(e.target.value);
+                                        setMaster(val);
+                                        applyAndPlay(globalEditor, { ...uiState, master: val }, text);
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ export default function PlaybackControls({ onProcess, onProcessPlay, onPlay, onS
     return (
         <div className="card shadow-sm mb-3">
             <div className="card-body text-center">
-                <h5 className="text-primary mb-3">Playback Controls</h5>
+                <h5>Playback Controls</h5>
                 <div className="d-flex flex-wrap gap-2 justify-content-center">
                     <button onClick={onProcess} className="btn btn-sm">
                         Preprocess

@@ -4,7 +4,7 @@ export default function InstrumentControls({ onToggle }) {
     return (
         <div className="card shadow-sm">
             <div className="card-body">
-                <h5 className="text-primary">Instrument 1 (p1)</h5>
+                <h5>Instrument 1 (p1)</h5>
                 <div className="form-check">
                     <input
                         className="form-check-input"

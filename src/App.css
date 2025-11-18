@@ -11,8 +11,8 @@ html, body {
 
 h1, h2, h3, h4, h5, h6,
 label, p, span {
-    color: #ff4d88 !important;
     font-weight: 600;
+    color: #ff4d88 !important;
 }
 
 .row {
@@ -20,14 +20,11 @@ label, p, span {
     margin: 0 !important;
 }
 
-.playback-column {
-    margin-left: auto;
-    padding-right: 0 !important;
-}
 
 .card {
-    border-radius: 10px;
-    border: none;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    border: 2px solid #ff8fb6 !important;
     margin-bottom: 0.8rem;
     display: flex;
     flex-direction: column;
@@ -36,20 +33,27 @@ label, p, span {
     backdrop-filter: blur(6px);
 }
 
-.card-body {
+.card-body  {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     width: 100%;
+    border: 2px solid #ff8fb6 !important;
+    background: rgba(255, 240, 245, 0.65) !important;
+    border-radius: 0 !important; 
+    border: none !important;
+    padding: 14px !important;
 }
 
 .col-md-10 {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 120px);
     min-height: 0 !important;
-    overflow-x: hidden !important;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    overflow-y: auto !important;
 }
 
 .editor-panels {
@@ -60,6 +64,15 @@ label, p, span {
     min-height: 0 !important;
     overflow-x: hidden !important;
 }
+
+.editor-panels .editor-card {
+    display: flex;
+    flex-direction: column;
+}
+.editor-panels {
+    margin-bottom: 0px;
+}
+
 
 .editor-card {
     display: flex;
@@ -75,6 +88,8 @@ label, p, span {
         flex: 0 0 60% !important;
     }
 
+
+
     .editor-card .card,
     .editor-card .card-body {
         flex: 1 !important;
@@ -86,22 +101,20 @@ label, p, span {
 
 textarea#proc {
     flex: 1 !important;
-    width: 100%;
-    min-height: 0 !important;
-    background: #ffe6ef !important;
-    border: 2px solid #ff8fb6 !important;
-    border-radius: 10px !important;
+    height: 375px !important;
+    width: 600px !important;
+    background: #ffe7f0 !important;
+    border: 1px solid #ff8fb6 !important;
+    border-radius: 15px !important;
     color: #ff4d88 !important;
-    padding: 12px;
-    resize: none;
-    overflow-y: auto;
+    overflow: hidden !important;
     font-family: monospace;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 #editor {
     flex: 0 0 auto !important; 
-    height: 438px !important; 
+    height: 375px !important; 
     width: 890px !important; 
 
     display: flex;
@@ -111,7 +124,7 @@ textarea#proc {
 
 .cm-editor {
     flex: 1 !important;
-    height: 438px !important; 
+    height: 375px !important; 
     width: 890px !important; 
     background: #3d1428 !important; 
     border: 1px solid #ff8fb6 !important; 
@@ -190,3 +203,118 @@ body {
 .cm-scroller, textarea#proc {
     overflow-y: auto !important; 
 }
+
+.json-controls-wrapper {
+    background: rgba(255, 240, 245, 0.75);
+    border-radius: 12px;
+    padding: 18px 20px;
+    border: 2px solid #ff8fb6;
+    margin-top: 40px; 
+    box-shadow: 0 4px 10px rgba(255, 100, 150, 0.2);
+}
+
+.json-title {
+    color: #ff4d88;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.json-button-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.json-btn {
+    background: linear-gradient(135deg, #ff76a6, #ff4d88);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: 140px; 
+    text-align: center;
+    transition: transform 0.15s ease;
+}
+
+    .json-btn:hover {
+        transform: scale(1.05);
+    }
+
+.json-wrapper {
+    clear: both;
+}
+
+.json-spacing {
+    width: 100%;
+    margin-top:-45px !important;
+    display: block;
+}
+
+.json-wrapper {
+    width: 100%;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px; 
+    background: #e5e5e5;
+    border-radius: 10px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+    input[type="range"]::-webkit-slider-runnable-track {
+        height: 8px;
+        background: linear-gradient(90deg, #ffb3d1, #ff8bb8);
+        border-radius: 10px;
+    }
+
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 18px; 
+        width: 18px;
+        background: #c20064; 
+        border-radius: 50%;
+        cursor: pointer;
+        margin-top: -5px; 
+    }
+
+    input[type="range"]::-moz-range-track {
+        height: 8px;
+        background: #e5e5e5;
+        border-radius: 10px;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        height: 18px;
+        width: 18px;
+        background: #c20064;
+        border-radius: 50%;
+        border: none;
+    }
+
+    input[type="range"]::-ms-track {
+        height: 8px;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+    }
+
+    input[type="range"]::-ms-fill-lower,
+    input[type="range"]::-ms-fill-upper {
+        background: #e5e5e5;
+        border-radius: 10px;
+    }
+
+    input[type="range"]::-ms-thumb {
+        height: 18px;
+        width: 18px;
+        background: #c20064;
+        border-radius: 50%;
+    }

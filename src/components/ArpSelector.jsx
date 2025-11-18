@@ -4,7 +4,7 @@ export default function ArpSelector({ value, onChange }) {
     return (
         <div className="card shadow-sm mb-3">
             <div className="card-body">
-                <h5 className="text-primary mb-2">Arpeggiator Mode</h5>
+                <h5>Arpeggiator Mode</h5>
                 <select
                     className="form-select"
                     value={value}

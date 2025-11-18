@@ -4,7 +4,7 @@ export default function ReverbControl({ value, onChange }) {
     return (
         <div className="card shadow-sm mb-3">
             <div className="card-body">
-                <h5 className="text-primary mb-2">Reverb Amount</h5>
+                <h5>Reverb Amount</h5>
                 <input
                     type="range"
                     min="0"

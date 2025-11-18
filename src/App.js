@@ -21,20 +21,6 @@ import ArpSelector from "./components/ArpSelector";
 
 let globalEditor = null;
 
-export function SetupButtons() {
-    document.getElementById('play').addEventListener('click', () => {
-        globalEditor.evaluate();});
-
-    document.getElementById('stop').addEventListener('click', () => {
-        globalEditor.stop();});
-
-    document.getElementById('process').addEventListener('click', () => {
-        Proc(window.__uiState);});
-
-    document.getElementById('process_play').addEventListener('click', () => {
-        Proc(window.__uiState);
-        globalEditor.evaluate();});
-}
 export function ProcAndPlay(uiState) {
     if (!globalEditor) return;
 
@@ -151,7 +137,6 @@ export default function StrudelDemo() {
                 });
             
             document.getElementById('proc').value = stranger_tune
-            SetupButtons()
             Proc(window.__uiState)
         }
     }, [ ]);

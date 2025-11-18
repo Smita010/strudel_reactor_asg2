@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\tempocontrol.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\tempocontrol.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,28 +54,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "App.js",
-              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
-              "RelativeDocumentMoniker": "src\\App.js",
-              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
-              "RelativeToolTip": "src\\App.js",
-              "ViewState": "AgIAAJ4AAAAAAAAAAAAQwP4AAABKAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "TempoControl.js",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\TempoControl.js",
+              "RelativeDocumentMoniker": "src\\components\\TempoControl.js",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\components\\TempoControl.js",
+              "RelativeToolTip": "src\\components\\TempoControl.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-15T05:35:05.046Z",
+              "WhenOpened": "2025-11-15T08:07:14.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.css",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.css",
+              "RelativeDocumentMoniker": "src\\App.css",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.css",
+              "RelativeToolTip": "src\\App.css",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAAMIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-15T05:32:41.756Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "App.css",
-              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.css",
-              "RelativeDocumentMoniker": "src\\App.css",
-              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.css*",
-              "RelativeToolTip": "src\\App.css*",
-              "ViewState": "AgIAALQAAAAAAAAAAAAwwMcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-11-15T05:32:41.756Z",
+              "Title": "App.js",
+              "DocumentMoniker": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
+              "RelativeDocumentMoniker": "src\\App.js",
+              "ToolTip": "C:\\Users\\smita\\source\\repos\\strudel_reactor_asg2\\src\\App.js",
+              "RelativeToolTip": "src\\App.js",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAIwLsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-15T05:35:05.046Z",
               "EditorCaption": ""
             }
           ]

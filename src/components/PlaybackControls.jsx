@@ -8,11 +8,6 @@ export default function PlaybackControls({ onProcess, onProcessPlay, onPlay, onS
                     <button onClick={onProcess} className="btn btn-sm">
                         Preprocess
                     </button>
-
-                    <button onClick={onProcessPlay} className="btn btn-sm">
-                        Proc & Play
-                    </button>
-
                     <button onClick={onPlay} className="btn btn-sm">
                         Play
                     </button>
